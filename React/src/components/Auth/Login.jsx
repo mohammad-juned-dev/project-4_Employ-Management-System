@@ -26,26 +26,26 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let newErrors = {
+    const newErrors = {
       email: "",
       password: "",
     };
 
-    const isvalid = true;
+    let isValid = true;
 
     if (!formdata.email) {
-      newErrors.email("Email is required");
-      isvalid = false
+      newErrors.email = "Email is required";
+      isValid = false;
     }
     if (!formdata.password) {
-      newErrors.password("Password is required");
-      isvalid = false
+      newErrors.password = "Password is required";
+      isValid = false;
     }
 
-    console.log(formdata);
-    
     setErrors(newErrors);
-    if (!isvalid) return;
+    if (!isValid) return;
+
+    console.log(formdata);
   };
 
   return (

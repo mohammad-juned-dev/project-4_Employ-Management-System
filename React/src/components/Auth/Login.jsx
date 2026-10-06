@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Login = () => {
+const Login = ({handleLogin}) => {
   const [formdata, setFormdata] = useState({
     email: "",
     password: "",
@@ -9,6 +9,8 @@ const Login = () => {
     email: "",
     password: "",
   });
+
+  
 
   const onChange = (e) => {
     const { name, type, value, checked } = e.target;
@@ -45,24 +47,48 @@ const Login = () => {
     setErrors(newErrors);
     if (!isValid) return;
 
-    console.log(formdata);
+handleLogin(formdata.email , formdata.password)
+
+  setFormdata({
+    email : "",
+    password : ""
+  })
   };
 
+
+
+  
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+
+  // const SubmitHandler = (e) => {
+  //   e.preventDefault();
+
+  //   setEmail("")
+  //   setPassword("")
+  // };
   return (
-    <div className="h-screen w-screen flex flex-col items-center justify-center">
+    <div className="bg-[#1C1C1C] h-screen w-screen flex flex-col items-center justify-center">
       <div className="h-[30rem] w-max px-10 py-10 border-2 border-solid border-emerald-700  flex flex-col items-center justify-around rounded-xl">
         <div className="flex flex-col items-center justify-center">
           <h1 className="self-start justify-self-start text-2xl">Log In</h1>
           <form
-            onSubmit={handleSubmit}
+            onSubmit={(e) => {
+              // SubmitHandler(e);
+            handleSubmit(e)
+            }}
             className="h-max w-max px-10 py-10 flex flex-col items-center justify-center gap-5 "
           >
             <input
               required={true}
-              className=" px-5 py-1 outline-none border-2 border-solid border-emerald-700 rounded-full placeholder:text-gray-400"
+              className=" px-5 py-1 outline-none border-2 border-solid border-emerald-700 rounded-full placeholder:text-gray-400 text-black"
               type="text"
               value={formdata.email}
-              onChange={onChange}
+              onChange={(e) => {
+                
+                onChange(e)
+                // setEmail(e.target.value);
+              }}
               name="email"
               id=""
               placeholder="Enter Your Email"
@@ -70,16 +96,19 @@ const Login = () => {
             />
             <input
               required={true}
-              className=" px-5 py-1 outline-none border-2 border-solid border-emerald-700 rounded-full placeholder:text-gray-400"
+              className="text-black px-5 py-1 outline-none border-2 border-solid border-emerald-700 rounded-full placeholder:text-gray-400"
               type="password"
-              value={formdata.password}
               name="password"
-              onChange={onChange}
+              value={formdata.password}
+              onChange={(e) => {
+                
+                onChange(e)
+                // setPassword(e.target.value);
+              }}
               id=""
               placeholder="Enter Your Password"
               autoComplete="new-password"
             />
-            <input type="checkbox" className="self-start " />
             <button className=" w-full px-5 py-1 bg-emerald-700 rounded-full transition-all active:scale-95 text-white">
               Log In
             </button>

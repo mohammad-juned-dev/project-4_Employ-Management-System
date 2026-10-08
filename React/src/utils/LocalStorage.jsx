@@ -1,8 +1,15 @@
-const employees = [
+const employees =[
   {
     "id": "EMP001",
+    "name": "John Doe",
     "email": "john.doe@example.com",
     "password": "123",
+    "taskcount": {
+      "active_task_count": 2,
+      "completed_task_count": 1,
+      "failed_task_count": 1,
+      "new_task": 1
+    },
     "tasks": [
       {
         "task_title": "Update Database Schema",
@@ -48,8 +55,15 @@ const employees = [
   },
   {
     "id": "EMP002",
+    "name": "Jane Smith",
     "email": "jane.smith@example.com",
     "password": "123",
+    "taskcount": {
+      "active_task_count": 2,
+      "completed_task_count": 1,
+      "failed_task_count": 0,
+      "new_task": 1
+    },
     "tasks": [
       {
         "task_title": "Quarterly Financial Report",
@@ -85,8 +99,15 @@ const employees = [
   },
   {
     "id": "EMP003",
+    "name": "Robert Johnson",
     "email": "robert.johnson@example.com",
     "password": "123",
+    "taskcount": {
+      "active_task_count": 3,
+      "completed_task_count": 1,
+      "failed_task_count": 1,
+      "new_task": 2
+    },
     "tasks": [
       {
         "task_title": "Design Landing Page",
@@ -142,8 +163,15 @@ const employees = [
   },
   {
     "id": "EMP004",
+    "name": "Emily Davis",
     "email": "emily.davis@example.com",
     "password": "123",
+    "taskcount": {
+      "active_task_count": 2,
+      "completed_task_count": 1,
+      "failed_task_count": 0,
+      "new_task": 1
+    },
     "tasks": [
       {
         "task_title": "Onboard New Hires",
@@ -179,8 +207,15 @@ const employees = [
   },
   {
     "id": "EMP005",
+    "name": "Michael Brown",
     "email": "michael.brown@example.com",
     "password": "123",
+    "taskcount": {
+      "active_task_count": 3,
+      "completed_task_count": 1,
+      "failed_task_count": 0,
+      "new_task": 2
+    },
     "tasks": [
       {
         "task_title": "Customer Support Ticket Backlog",

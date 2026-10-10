@@ -14,3 +14,7 @@ display: none;
 #AllTask::-webkit-scrollbar{
 display: none;
 }
+
+#AllTaskInner::-webkit-scrollbar{
+display: none;
+}

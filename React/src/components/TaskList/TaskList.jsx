@@ -5,7 +5,7 @@ import CompleteTask from "./CompleteTask";
 import FailedTask from "./FailedTask";
 
 const TaskList = ({data}) => {
-  console.log(data);
+
   
   return (
     <div
@@ -18,15 +18,15 @@ const TaskList = ({data}) => {
      <FailedTask/> */}
 
      {data.tasks.map((elem ,idx)=>{
-        console.log(elem);
+  
     if(elem.active){
-      return <AcceptTask key={idx}/>
+      return <AcceptTask key={idx} data={elem}/>
     }else if(elem.new_task){
-      return <NewTask key={idx} />
+      return <NewTask key={idx} data={elem} />
     }else if(elem.completed){
-      return <CompleteTask  key={idx}/>
+      return <CompleteTask  key={idx} data={elem}/>
     }else if(elem.failed){
-      return <FailedTask  key={idx}/>
+      return <FailedTask  key={idx} data={elem}/>
     }
     
       

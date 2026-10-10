@@ -1,9 +1,8 @@
 import React from 'react'
 
 
-const Header = ({ onLogout , data}) => {
-  
-  
+const Header = ({ data, onLogout }) => {
+
   return (
     <div className='w-full py-5 flex items-center justify-between'>
   <h1 className=' text-xl font-semibold'>Hello <br /> <span className='text-2xl font-semibold'>{data?.name ?? "Employee"}</span></h1>

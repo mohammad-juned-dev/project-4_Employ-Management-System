@@ -6,5 +6,6 @@ export default defineConfig({
   plugins: [react()],
   server : {
     open  : true
-  }
+  },
+  base: 'project-4_Employ-Management-System'
 })

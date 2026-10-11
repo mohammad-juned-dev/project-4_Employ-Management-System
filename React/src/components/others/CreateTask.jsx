@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../../context/AuthProvider";
 
 const CreateTask = () => {
+  const [userData, setUserData] = useContext(AuthContext);
+
   const [taskData, setTaskData] = useState({
     title: "",
     description: "",
@@ -8,8 +11,6 @@ const CreateTask = () => {
     assignedTo: "",
     category: "",
   });
-
-  const [newTask, setNewTask] = useState({});
 
   const [errors, setErrors] = useState({
     title: "",
@@ -32,6 +33,7 @@ const CreateTask = () => {
   };
   const submitHndler = (e) => {
     e.preventDefault();
+    if (!userData) return;
     let newerrors = {
       title: "",
       description: "",
@@ -66,39 +68,58 @@ const CreateTask = () => {
     setErrors(newerrors);
     if (!isvalid) return;
 
-    setNewTask({
-      title: taskData.title,
-      description: taskData.description,
-      date: taskData.date,
+    const createdTask = {
+      task_title: taskData.title,
+      task_description: taskData.description,
+      task_date: taskData.date,
       category: taskData.category,
       active: false,
-      newTask: true,
+      new_task: true,
       failed: false,
       completed: false,
+    };
+
+    const assignedEmployee = userData.find(
+      (employee) =>
+        employee.name.trim().toLowerCase() ===
+        taskData.assignedTo.trim().toLowerCase(),
+    );
+
+    if (!assignedEmployee) {
+      setErrors((prev) => ({
+        ...prev,
+        assignedTo: "No employee found with that name",
+      }));
+      return;
+    }
+
+    const updatedEmployees = userData.map((employee) =>
+      employee.id === assignedEmployee.id
+        ? {
+            ...employee,
+            tasks: [...employee.tasks, createdTask],
+            taskcount: {
+              ...employee.taskcount,
+              new_task: employee.taskcount.new_task + 1,
+            },
+          }
+        : employee,
+    );
+
+    setUserData(updatedEmployees);
+    localStorage.setItem("employees", JSON.stringify(updatedEmployees));
+    setTaskData({
+      title: "",
+      description: "",
+      date: "",
+      assignedTo: "",
+      category: "",
     });
-
-    const data = JSON.parse(localStorage.getItem("employees"));
-
-    data.forEach((elem) => {
-      if (taskData.assignedTo == elem.name) {
-        console.log(elem.name);
-        elem.tasks.push(newTask);
-        console.log(elem.tasks);
-      }
-    });
-
-    // setTaskData({
-    //     title: "",
-    //     description: "",
-    //     date: "",
-    //     assignedTo: "",
-    //     category: "",
-    //   })
 
     // Keep the entered values until task assignment/creation is implemented.
   };
   return (
-    <div className="bg-[#1C1C1C] h-max w-full px-10 py-2 flex items-start justify-between rounded-xl ">
+    <div className="bg-[#1C1C1C] h-max w-full px-10 pt-3 flex items-start justify-between rounded-xl ">
       <form
         onSubmit={submitHndler}
         className="h-full w-full flex items-start justify-between rounded-xl"

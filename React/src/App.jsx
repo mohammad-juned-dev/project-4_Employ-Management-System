@@ -8,10 +8,10 @@ import { AuthContext } from "./context/AuthProvider.jsx";
 const App = () => {
   const [user, setUser] = useState(null);
   const [loggedinUserData, setLoggedinUserData] = useState(null);
-  const authData = useContext(AuthContext);
+  const [userData,setUserData] = useContext(AuthContext);
 
   useEffect(() => {
-    if (!authData) return;
+    if (!userData) return;
 
     const storedUser = localStorage.getItem("loggedInUser");
     if (!storedUser) return;
@@ -25,7 +25,7 @@ const App = () => {
           setUser(null);
           return;
         }
-        const employee = authData.employee.find(
+        const employee = userData.find(
           (item) => item.email === loggedInUser.email,
         );
         if (!employee) {
@@ -40,15 +40,15 @@ const App = () => {
       localStorage.removeItem("loggedInUser");
       setUser(null);
     }
-  }, [authData]);
+  }, [userData]);
 
   const handleLogin = (email, password) => {
     if (email == "admin@me.com" && password == "123") {
       setUser({ role: "admin" });
       localStorage.setItem("loggedInUser", JSON.stringify({ role: "admin" }));
       console.log(user);
-    } else if (authData) {
-      const employee = authData.employee.find((e) => {
+    } else if (userData) {
+      const employee = userData.find((e) => {
         return email === e.email && password === e.password;
       });
       if (employee) {
@@ -79,7 +79,10 @@ const App = () => {
       {user?.role === "admin" ? (
         <AdminDashboard onLogout={handleLogout} />
       ) : user?.role === "employee" ? (
-        <EmployeeDashboard data={loggedinUserData} onLogout={handleLogout} />
+        <EmployeeDashboard
+          data={userData?.find((employee) => employee.email === loggedinUserData?.email)}
+          onLogout={handleLogout}
+        />
       ) : null}
     </>
   );

@@ -66,12 +66,16 @@ Your typical workflow should be:
              Commit and push your changes to main:
 
 Bash
+
              git add .
              git commit -m "added new features"
              git origin push main
 
+
 Run your deploy command 
-             npm run deploy 
+
+            npm run deploy
+         
 to update the live site via the gh-pages branch.
 
 

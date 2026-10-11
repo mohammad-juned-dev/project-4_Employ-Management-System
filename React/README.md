@@ -52,3 +52,36 @@ Other sample employee accounts are defined in `src/utils/LocalStorage.jsx` and u
 - Vite
 - Tailwind CSS
 - Browser `localStorage` for demo data and session persistence
+
+
+1. When Making Changes (Writing Code)
+Always work on the main branch.
+
+Never manually edit code or commit changes directly on the gh-pages branch.
+
+Your typical workflow should be:
+
+             Make sure you are on main (git checkout main).
+             Write your code and test locally (npm run dev).   
+             Commit and push your changes to main:
+
+Bash
+             git add .
+             git commit -m "added new features"
+             git origin push main
+
+Run your deploy command 
+             npm run deploy 
+to update the live site via the gh-pages branch.
+
+
+2. When Cloning the Repository
+When you clone the repository on a new computer or folder (git clone <url>), it will automatically check out the main branch by default. This is correct.
+
+Once cloned, remember to install your dependencies before running or deploying:
+
+Bash
+npm install
+You never need to worry about manually checking out or creating the gh-pages branch on a new clone—the gh-pages package handles creating and updating it automatically when you run npm run deploy.
+
+💡 Golden Rule: Think of main as your workspace and gh-pages as a storage room that GitHub uses to host your website. You only ever touch your workspace (main).

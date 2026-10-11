@@ -28,15 +28,17 @@ const AllTask = ({ data }) => {
       </div>
       <div
         id="AllTaskInner"
-        className="bg-[#1C1C1C] flex-1 min-h-0 w-full pb-5 flex flex-col items-start justify-start gap-4 mt-2 rounded-xl overflow-y-auto "
+        className="bg-[#1C1C1C1C] flex-1 min-h-0 w-full pb-5 flex flex-col items-start justify-start gap-4 mt-2 rounded-xl overflow-y-auto "
       >
         {userData.map((elem, idx) => {
           return (
-            <div className="w-full h-max  border-1 border-white  py-2 px-5 flex items-start justify-between rounded-md gap-5">
-              <div
+            <div
               key={idx}
-              className=" w-full h-max  backdrop-blur-md flex items-start justify-between rounded-md gap-5"
+              className="w-full h-max border border-white/20 bg-white/5 py-2 px-5 flex items-start justify-between rounded-xl backdrop-blur-md gap-5"
             >
+              <div
+                className="w-full h-max flex items-start justify-between rounded-md gap-5"
+              >
               <h2 className="w-1/5 bg-transparent text-center text-lg font-semibold">
                 {elem.name}
               </h2>
